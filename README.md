@@ -66,3 +66,4 @@ Omar Al-azaizah.
   As needed but usually At the end of the day.
 - How will you communicate that it’s time to merge?
   Slack, and we will decide that in the Zoom meeting.
+666هههههههههه ليثالمحترمعمر 
