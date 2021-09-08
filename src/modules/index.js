@@ -1,11 +1,19 @@
 "use strict";
-const POSTGRES_URI = "";
+const POSTGRES_URI = process.env.DATABASE_URL;
 const { Sequelize, DataTypes } = require("sequelize");
-var sequelize = new Sequelize(POSTGRES_URI, {});
+const DATABASE_CONFIG = {
+  dialectOptions: {
+      ssl: {
+          require: true,
+          rejectUnauthorized: false,
+      }
+  }
+}
+var sequelize = new Sequelize(POSTGRES_URI, DATABASE_CONFIG);
 const Collection = require("./collection-class");
 
 const cart = require("./cart/cart");
-const address = require("./order/address");
+const address = require("./order/address"); 
 const order = require("./order/order");
 const orderDetails = require("./order/orderDetails");
 const category = require("./product/category");
@@ -171,5 +179,5 @@ module.exports = {
   Reviews: reviewsCollection,
   Type: typeCollection,
   Wishlist: wishlistCollection,
-  User: userModel,
+  users: userModel,
 };

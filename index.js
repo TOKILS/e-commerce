@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const { start } = require('./src/server');
 
-const { db } = require('./src/models/index');
+const { db } = require('./src/modules/index.js');
 
 
 db.sync()

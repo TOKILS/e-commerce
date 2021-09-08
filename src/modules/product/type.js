@@ -1,7 +1,7 @@
 "use strict";
 
 const Type = (sequelize, DataTypes) =>
-  sequelize.define("Cart", {
+  sequelize.define("Type", {
     CategoryID: {
       type: DataTypes.INTEGER,
       allowNull: false,

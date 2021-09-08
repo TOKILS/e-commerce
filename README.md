@@ -8,9 +8,9 @@
   we will create something similer to this: https://www.livefashionable.com/collections/new-arrivals
 - What problem or pain point does it solve? a. Keep it high level without going into too much detail. (3-4 sentences is enough)
 - Minimum Viable Product (MVP) definition.
-What is the minimum required for you to present on your demo day?
+  What is the minimum required for you to present on your demo day?
 
-## Team members:
+## Team members
 
 Khaled Tahat (team leader).
 Laith Hayajneh.
@@ -66,4 +66,3 @@ Omar Al-azaizah.
   As needed but usually At the end of the day.
 - How will you communicate that it’s time to merge?
   Slack, and we will decide that in the Zoom meeting.
-666هههههههههه ليثالمحترمعمر 

@@ -1,35 +1,31 @@
-"use strict";
+class DataCollection {
 
-class Collection {
   constructor(model) {
-    // the mddel should be a valid sequelize model
-    this.model = model;
+      this.model = model;
   }
 
-  async create(modelInfo) {
-    let record = await this.model.create(modelInfo);
-    return record;
+  get(id) {
+      if (id) { 
+          return this.model.findOne({ id });
+      }
+      else {
+          return this.model.findAll({});
+      }
   }
 
-  async get(id) {
-    let record = await this.model.findOne({ where: { id: id } });
-    return record;
+  create(record) {
+      return this.model.create(record);
   }
 
-  async getAll() {
-    let all = await this.model.findAll();
-    return all;
+  update(id, data) {
+      return this.model.findOne({ where: { id } })
+          .then(record => record.update(data));
   }
 
-  async update(id, modelInfo) {
-    let record = await this.model.findOne({ where: { id } });
-    let updateRecord = await record.update(modelInfo);
-    return updateRecord;
+  delete(id) {
+      return this.model.destroy({ where: { id } });
   }
 
-  async delete(id) {
-    await this.model.destroy({ where: { id } });
-  }
 }
 
-module.exports = Collection;
+module.exports = DataCollection;
