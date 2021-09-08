@@ -11,7 +11,15 @@ const userModel = (sequelize, DataTypes) => {
         username: { type: DataTypes.STRING, required: true, unique: true, allowNull: false },
         firstname: { type: DataTypes.STRING, required: true, allowNull: false },
         lastname: { type: DataTypes.STRING, required: true, allowNull: false },
-        password: { type: DataTypes.STRING, required: true, allowNull: false },
+        password: { type: DataTypes.STRING, required: true, allowNull: false ,
+            validate: {
+                validatePassword: function(password) {
+                              if(!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/.test(password))) {
+                                  throw new Error('The password must contain at least 10 and maximum 12 characters including at least 1 uppercase, 1 lowercase, one number and one special character.');
+                              }
+                          }
+                      },
+        },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
