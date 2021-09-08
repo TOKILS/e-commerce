@@ -1,6 +1,5 @@
 "use strict";
-const POSTGRES_URI =
-  "postgres://pfwvsseb:nsW3ouLEURu7OyQ_rDA7sJ8s13aeOTt7@tai.db.elephantsql.com/pfwvsseb";
+const POSTGRES_URI = "";
 const { Sequelize, DataTypes } = require("sequelize");
 var sequelize = new Sequelize(POSTGRES_URI, {});
 const Collection = require("./collection-class");

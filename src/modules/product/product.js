@@ -19,7 +19,7 @@ const Product = (sequelize, DataTypes) =>
       allowNull: false,
     },
     Discount: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     Size: {
       type: DataTypes.ARRAY(DataTypes.STRING),
@@ -30,7 +30,7 @@ const Product = (sequelize, DataTypes) =>
       allowNull: false,
     },
     Image: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
   });
