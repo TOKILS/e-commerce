@@ -3,6 +3,7 @@
 // 3rd Party Resources
 const express = require("express");
 const cors = require("cors");
+const http = require("http");
 
 // Esoteric Resources
 const notFoundHandler = require("./error-handlers/404");
@@ -13,7 +14,10 @@ const authRoutes = require("./routes/authRoutes.js");
 const v2Routes = require("./routes/v2.js");
 const extra = require("./routes/extra");
 // Prepare the express app
+const socket_io = require("socket.io");
 const app = express();
+let server = http.createServer(app);
+let io = socket_io(server);
 
 // App Level MW
 app.use(cors());
@@ -34,11 +38,12 @@ app.use("*", notFoundHandler);
 app.use(errorHandler);
 
 const start = (PORT) => {
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`Server is Running on Port ${PORT}`);
   });
 };
 module.exports = {
   server: app,
   start: start,
+  io: server,
 };
