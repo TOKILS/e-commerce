@@ -4,6 +4,8 @@
 const express = require("express");
 const cors = require("cors");
 
+const io = require("socket.io")((process.env.PORT || 3003), { cors: { origin: "*"}});
+
 // Esoteric Resources
 const notFoundHandler = require("./error-handlers/404");
 const errorHandler = require("./error-handlers/500");
@@ -40,4 +42,5 @@ const start = (PORT) => {
 module.exports = {
   server: app,
   start: start,
+  io: io,
 };
