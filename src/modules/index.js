@@ -3,17 +3,20 @@ const POSTGRES_URI = process.env.DATABASE_URL;
 const { Sequelize, DataTypes } = require("sequelize");
 const DATABASE_CONFIG = {
   dialectOptions: {
-      ssl: {
-          require: true,
-          rejectUnauthorized: false,
-      }
-  }
-}
-var sequelize = new Sequelize(POSTGRES_URI, DATABASE_CONFIG);
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+};
+var sequelize = new Sequelize(
+  "postgres://postgres:0000@localhost:5432/class4",
+  DATABASE_CONFIG
+);
 const Collection = require("./collection-class");
 
 const cart = require("./cart/cart");
-const address = require("./order/address"); 
+const address = require("./order/address");
 const order = require("./order/order");
 const orderDetails = require("./order/orderDetails");
 const category = require("./product/category");
@@ -22,6 +25,7 @@ const reviews = require("./product/reviews");
 const type = require("./product/type");
 const wishlist = require("./wishlist/wishlist");
 const user = require("./user");
+const messageSchema = require('./message-schema.js');
 
 const cartModel = cart(sequelize, DataTypes);
 const addressModel = address(sequelize, DataTypes);
@@ -33,6 +37,7 @@ const reviewsModel = reviews(sequelize, DataTypes);
 const typeModel = type(sequelize, DataTypes);
 const wishlistModel = wishlist(sequelize, DataTypes);
 const userModel = user(sequelize, DataTypes);
+const messageModel = messageSchema(sequelize,DataTypes);
 
 // wishList ----------------------------------------
 productModel.hasMany(wishlistModel, {
@@ -167,6 +172,7 @@ const productCollection = new Collection(productModel);
 const reviewsCollection = new Collection(reviewsModel);
 const typeCollection = new Collection(typeModel);
 const wishlistCollection = new Collection(wishlistModel);
+const messageCollection = new Collection(messageModel);
 
 module.exports = {
   db: sequelize,
@@ -179,5 +185,6 @@ module.exports = {
   Reviews: reviewsCollection,
   Type: typeCollection,
   Wishlist: wishlistCollection,
+  message: messageCollection,
   users: userModel,
 };
