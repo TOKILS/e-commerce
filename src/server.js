@@ -1,5 +1,6 @@
 "use strict";
 
+
 const uuid = require("uuid").v4; // random uuid
 const bearerIo = require("./middleware/bearer-io.js");
 
@@ -18,6 +19,9 @@ const authRoutes = require("./routes/authRoutes.js");
 const v2Routes = require("./routes/v2.js");
 const { message } = require("./modules/index.js"); // message Model Class
 
+const authRoutes = require("./routes/authRoutes.js");
+const v2Routes = require("./routes/v2.js");
+const extra = require("./routes/extra");
 // Prepare the express app
 const app = express();
 
@@ -79,6 +83,8 @@ app.get("/", (req, res) => {
 
 app.use(authRoutes);
 app.use("/api/v2", v2Routes);
+app.use("/api/v3", extra);
+
 
 // Catchalls
 app.use("*", notFoundHandler);
@@ -93,5 +99,4 @@ const start = (PORT) => {
 module.exports = {
   server: app,
   start: start,
-  // io: io,
 };
