@@ -123,12 +123,12 @@ class DataCollection {
         return await orderDetails.get(ele.OrderID);
       })
     );
-    finallRecords = await Promise.all(
+    let productsList = await Promise.all(
       finallRecords[0].map(async (ele) => {
         return await products.get(ele.ProductID);
       })
     );
-    return finallRecords;
+    return { productsList, orderState: allRecords[0].State };
   }
 
   async getProductInfoFromOrder(UserID, orderDetails, products) {
