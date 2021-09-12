@@ -25,14 +25,15 @@ const Product = (sequelize, DataTypes) =>
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
-    Color: {
+    // all color and images in the same object
+    ProductObj: {
       type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: false,
     },
-    Image: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false,
-    },
+    // Image: {
+    //   type: DataTypes.ARRAY(DataTypes.STRING),
+    //   allowNull: false,
+    // },
   });
 
 module.exports = Product;
