@@ -1,15 +1,15 @@
 "use strict";
-const POSTGRES_URI = process.env.DATABASE_URL;
+const POSTGRES_URI =  process.env.NODE_ENV === 'test' ? 'sqlite:memory:' : process.env.DATABASE_URL;
 const { Sequelize, DataTypes } = require("sequelize");
-const DATABASE_CONFIG = {
+
+const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
   dialectOptions: {
-      ssl: {
-          require: true,
-          rejectUnauthorized: false,
-      }
-  }
-}
-var sequelize = new Sequelize(POSTGRES_URI, DATABASE_CONFIG);
+    ssl: true,
+    rejectUnauthorized: false,
+  },
+} : {};
+
+const sequelize = new Sequelize(POSTGRES_URI, DATABASE_CONFIG);
 const Collection = require("./collection-class");
 
 const cart = require("./cart/cart");
