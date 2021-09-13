@@ -1,0 +1,49 @@
+"use strict";
+
+// 3rd Party Resources
+const express = require("express");
+const cors = require("cors");
+const http = require("http");
+
+// Esoteric Resources
+const notFoundHandler = require("./error-handlers/404");
+const errorHandler = require("./error-handlers/500");
+const loggerMiddleware = require("./middleware/logger");
+
+const authRoutes = require("./routes/authRoutes.js");
+const v2Routes = require("./routes/v2.js");
+const extra = require("./routes/extra");
+// Prepare the express app
+const socket_io = require("socket.io");
+const app = express();
+let server = http.createServer(app);
+let io = socket_io(server);
+
+// App Level MW
+app.use(cors());
+app.use(express.json());
+
+app.use(loggerMiddleware);
+
+app.get("/", (req, res) => {
+  res.status(200).send("Hello 👋 🖥 server");
+});
+
+app.use(authRoutes);
+app.use("/api/v2", v2Routes);
+app.use("/api/v3", extra);
+
+// Catchalls
+app.use("*", notFoundHandler);
+app.use(errorHandler);
+
+const start = (PORT) => {
+  server.listen(PORT, () => {
+    console.log(`Server is Running on Port ${PORT}`);
+  });
+};
+module.exports = {
+  server: app,
+  start: start,
+  io: server,
+};
