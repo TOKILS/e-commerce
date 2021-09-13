@@ -4,22 +4,12 @@ const { Sequelize, DataTypes } = require("sequelize");
 
 const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
   dialectOptions: {
-<<<<<<< HEAD
     ssl: true,
     rejectUnauthorized: false,
   },
 } : {};
 
 const sequelize = new Sequelize(POSTGRES_URI, DATABASE_CONFIG);
-=======
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
-};
-var sequelize = new Sequelize(POSTGRES_URI, DATABASE_CONFIG);
->>>>>>> 48ef4f2daca0f6c09918e2893ec697e00a4e5c45
 const Collection = require("./collection-class");
 
 const cart = require("./cart/cart");
