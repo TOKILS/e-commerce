@@ -4,11 +4,12 @@ class DataCollection {
   }
 
   get(id) {
-    if (id) {
-      return this.model.findOne({ where: { id } });
-    } else {
-      return this.model.findAll({});
-    }
+      if (id) { 
+          return this.model.findOne({ where:{ id: id}});
+      }
+      else {
+          return this.model.findAll({});
+      }
   }
 
   create(record) {

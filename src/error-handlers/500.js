@@ -1,11 +1,9 @@
 'use strict';
 
-module.exports = (err, req, res, next) => {
-    const errorMsg = err.message ? err.message : err;
-    const errorObj = {
-        status: 500,
-        route: req.path,
-        message: errorMsg
-    }
-    res.status(500).json(errorObj);
-}
+module.exports = (error , req , res , next) => {
+  res.status(500).send({
+    error: 500,
+    route: req.path,
+    message: `Internal Server Error - ${error}`,
+  });
+};

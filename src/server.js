@@ -29,6 +29,10 @@ app.get("/", (req, res) => {
   res.status(200).send("Hello 👋 🖥 server");
 });
 
+app.get('/bad',(req, res, next)=> {
+  next ('Error Bad End Point');
+});
+
 app.use(authRoutes);
 app.use("/api/v2", v2Routes);
 app.use("/api/v3", extra);
