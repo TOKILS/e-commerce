@@ -29,8 +29,8 @@ app.get("/", (req, res) => {
   res.status(200).send("Hello 👋 🖥 server");
 });
 
-app.get('/bad',(req, res, next)=> {
-  next ('Error Bad End Point');
+app.get("/bad", (req, res, next) => {
+  next("Error Bad End Point");
 });
 
 app.use(authRoutes);
@@ -49,5 +49,5 @@ const start = (PORT) => {
 module.exports = {
   server: app,
   start: start,
-  io: server,
+  io: io,
 };

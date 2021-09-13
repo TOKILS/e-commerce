@@ -1,24 +1,24 @@
-// "use strict";
+"use strict";
 
-// const { users } = require("../modules/index");
+const { users } = require("../modules/index");
 
-// module.exports = async (socket, next) => {
-//   try {
-//     if (!socket.handshake.auth.token) {
-//       _authError();
-//     }
+module.exports = async (socket, next) => {
+  try {
+    if (!socket.handshake.auth.token) {
+      _authError();
+    }
 
-//     const token = socket.handshake.auth.token.split(" ").pop();
-//     const validUser = await users.authenticateToken(token);
+    const token = socket.handshake.auth.token.split(" ").pop();
+    const validUser = await users.authenticateToken(token);
+    console.log(socket.handshake.auth.email);
+    socket.bearerAuthObj = validUser;
 
-//     socket.bearerAuthObj = validUser;
+    next();
+  } catch (e) {
+    _authError();
+  }
 
-//     next();
-//   } catch (e) {
-//     _authError();
-//   }
-
-//   function _authError() {
-//     next("Invalid Login");
-//   }
-// };
+  function _authError() {
+    next("Invalid Login");
+  }
+};
