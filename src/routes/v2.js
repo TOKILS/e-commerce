@@ -1,10 +1,11 @@
 "use strict";
 
 const express = require("express");
+const io = require('socket.io-client');
 const dataModules = require("../modules/index.js");
 const bearerAuth = require("../middleware/bearer.js");
 const permissions = require("../middleware/acl.js");
-
+const socket = io.connect(`http://localhost:3001/notify`);
 const router = express.Router();
 
 router.param("model", (req, res, next) => {
@@ -39,6 +40,10 @@ async function handleGetOne(req, res) {
 async function handleCreate(req, res) {
   let obj = req.body;
   let newRecord = await req.model.create(obj);
+  const modelName = req.params.model;
+  if (modelName === 'Order') {
+    socket.emit('Order', newRecord)
+  }
   res.status(201).json(newRecord);
 }
 
