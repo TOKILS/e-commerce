@@ -1,13 +1,17 @@
 "use strict";
-const POSTGRES_URI =  process.env.NODE_ENV === 'test' ? 'sqlite:memory:' : process.env.DATABASE_URL;
+const POSTGRES_URI =
+  process.env.NODE_ENV === "test" ? "sqlite:memory:" : process.env.DATABASE_URL;
 const { Sequelize, DataTypes } = require("sequelize");
 
-const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
-  dialectOptions: {
-    ssl: true,
-    rejectUnauthorized: false,
-  },
-} : {};
+const DATABASE_CONFIG =
+  process.env.NODE_ENV === "production"
+    ? {
+        dialectOptions: {
+          ssl: true,
+          rejectUnauthorized: false,
+        },
+      }
+    : {};
 
 const sequelize = new Sequelize(POSTGRES_URI, DATABASE_CONFIG);
 const Collection = require("./collection-class");
@@ -23,7 +27,11 @@ const type = require("./product/type");
 const wishlist = require("./wishlist/wishlist");
 const user = require("./user");
 const message = require("./message");
+const color = require("./product/color");
+const size = require("./product/size");
+const image = require("./product/image");
 
+// !====================
 const cartModel = cart(sequelize, DataTypes);
 const addressModel = address(sequelize, DataTypes);
 const orderModel = order(sequelize, DataTypes);
@@ -35,6 +43,9 @@ const typeModel = type(sequelize, DataTypes);
 const wishlistModel = wishlist(sequelize, DataTypes);
 const userModel = user(sequelize, DataTypes);
 const messageModel = message(sequelize, DataTypes);
+const colorModel = color(sequelize, DataTypes);
+const sizeModel = size(sequelize, DataTypes);
+const imageModel = image(sequelize, DataTypes);
 // wishList ----------------------------------------
 productModel.hasMany(wishlistModel, {
   sourceKey: "id",
@@ -149,6 +160,34 @@ productModel.belongsTo(typeModel, {
   targetKey: "id",
 });
 
+// Color -------------------------
+productModel.hasMany(colorModel, {
+  sourceKey: "id",
+  foreignKey: "ProductID",
+});
+colorModel.belongsTo(productModel, {
+  foreignKey: "ProductID",
+  targetKey: "id",
+});
+// Size -------------------------
+colorModel.hasMany(sizeModel, {
+  sourceKey: "id",
+  foreignKey: "ColorID",
+});
+sizeModel.belongsTo(colorModel, {
+  foreignKey: "ColorID",
+  targetKey: "id",
+});
+// image -------------------------
+colorModel.hasMany(imageModel, {
+  sourceKey: "id",
+  foreignKey: "ColorID",
+});
+imageModel.belongsTo(colorModel, {
+  foreignKey: "ColorID",
+  targetKey: "id",
+});
+
 // Type ----------------------------------------
 categoryModel.hasMany(typeModel, {
   sourceKey: "id",
@@ -169,6 +208,10 @@ const reviewsCollection = new Collection(reviewsModel);
 const typeCollection = new Collection(typeModel);
 const wishlistCollection = new Collection(wishlistModel);
 const messageCollection = new Collection(messageModel);
+const colorCollection = new Collection(colorModel);
+const sizeCollection = new Collection(sizeModel);
+const imageCollection = new Collection(imageModel);
+
 module.exports = {
   db: sequelize,
   Cart: cartCollection,
@@ -181,5 +224,8 @@ module.exports = {
   Type: typeCollection,
   Wishlist: wishlistCollection,
   users: userModel,
-  message: messageCollection,
+  Message: messageCollection,
+  Color: colorCollection,
+  Size: sizeCollection,
+  Image: imageCollection,
 };
