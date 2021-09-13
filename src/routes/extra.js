@@ -13,6 +13,7 @@ router.get("/reviews/:id", bearerAuth, getProductReviews);
 // Products
 router.get("/cartProducts/:id", bearerAuth, getProductFromCart);
 router.get("/cartProductsInfo/:id", bearerAuth, getProductInfoFromCart);
+router.get("/Products/:id", bearerAuth, getProducts);
 // wishlist
 router.get("/wishlistProducts/:id", bearerAuth, getProductFromWishlist);
 router.get("/wishlistProductsInfo/:id", bearerAuth, getProductInfoFromWishlist);
@@ -114,6 +115,16 @@ async function getTypeProducts(req, res) {
 async function getCategoryTypes(req, res) {
   const id = req.params.id;
   let allRecords = await dataModules.Type.getCategoryTypes(id);
+  res.status(200).json(allRecords);
+}
+async function getProducts(req, res) {
+  const id = req.params.id;
+  let allRecords = await dataModules.Product.getProducts(
+    id,
+    dataModules.Color,
+    dataModules.Image,
+    dataModules.Size
+  );
   res.status(200).json(allRecords);
 }
 

@@ -4,12 +4,11 @@ class DataCollection {
   }
 
   get(id) {
-      if (id) { 
-          return this.model.findOne({ where:{ id: id}});
-      }
-      else {
-          return this.model.findAll({});
-      }
+    if (id) {
+      return this.model.findOne({ where: { id: id } });
+    } else {
+      return this.model.findAll({});
+    }
   }
 
   create(record) {
@@ -167,6 +166,39 @@ class DataCollection {
 
   getCategoryTypes(CategoryID) {
     return this.model.findAll({ where: { CategoryID } });
+  }
+  // img - color - size for products
+  getProductDetails(ProductID) {
+    return this.model.findAll({ where: { ProductID } });
+  }
+  getColorDetails(ColorID) {
+    return this.model.findAll({ where: { ColorID } });
+  }
+  // --------------------------------------------
+  async getProducts(id, color, image, size) {
+    let allRecords = await this.model.findAll({ where: { id } });
+    let finallRecords = await Promise.all(
+      allRecords.map(async (ele) => {
+        return {
+          ...ele.dataValues,
+          color: await color.getProductDetails(ele.id),
+        };
+      })
+    );
+    let x = await Promise.all(
+      finallRecords.map(
+        async (element) =>
+          await element.color.map(async (ele) => {
+            return await {
+              ...ele.dataValues,
+              image: await image.getColorDetails(ele.id),
+              size: await size.getColorDetails(ele.id),
+            };
+          })
+      )
+    );
+
+    return x;
   }
 }
 
