@@ -17,32 +17,31 @@ let users = {
     email: "admin@gmail.com",
     role: "admin"
   },
-  vendor: {
-    username: "vendor",
-    firstname: "admin",
-    lastname: "admin",
-    password: "password",
-    email: "vendor@gmail.com",
-    role: "vendor"
-  },
-  user: {
-    username: "user",
-    firstname: "user",
-    lastname: "user",
-    password: "password",
-    email: "user@gmail.com",
-    role: "user"
-  },
+  // vendor: {
+  //   username: "vendor",
+  //   firstname: "admin",
+  //   lastname: "admin",
+  //   password: "password",
+  //   email: "vendor@gmail.com",
+  //   role: "vendor"
+  // },
+  // user: {
+  //   username: "user",
+  //   firstname: "user",
+  //   lastname: "user",
+  //   password: "password",
+  //   email: "user@gmail.com",
+  //   role: "user"
+  // },
 };
 
-beforeAll(async (done) => {
+beforeAll(async () => {
   await db.sync();
-  done();
 });
-afterAll(async (done) => {
-  await db.drop();
-  done();
-});
+// afterAll(async (done) => {
+//   await db.drop();
+//   done();
+// });
 
 
 describe('Auth Router', () => {
@@ -55,11 +54,10 @@ describe('Auth Router', () => {
 
         const response = await mockRequest.post('/signup').send(users[userType]);
         const userObject = response.body;
-
         expect(response.status).toBe(201);
-        expect(userObject.token).toBeDefined();
-        expect(userObject.user.id).toBeDefined();
-        expect(userObject.user.username).toEqual(users[userType].username);
+        expect(userObject.password).toBeDefined();
+        expect(userObject.id).toBeDefined();
+        expect(userObject.username).toEqual(users[userType].username);
         done();
       });
 
@@ -71,8 +69,8 @@ describe('Auth Router', () => {
         const userObject = response.body;
         expect(response.status).toBe(200);
         expect(userObject.token).toBeDefined();
-        expect(userObject.user.id).toBeDefined();
-        expect(userObject.user.username).toEqual(users[userType].username);
+        expect(userObject.password).toBeDefined();
+        expect(userObject.username).toEqual(users[userType].username);
         done();
       });
 
@@ -82,10 +80,9 @@ describe('Auth Router', () => {
           .auth(users[userType].username, users[userType].password);
 
         const token = response.body.token;
-
         const bearerResponse = await mockRequest
-          .get('/users')
-          .set('Authorization', `Bearer ${token}`);
+        .get('/users')
+        .set('Authorization', `Bearer ${token}`);
 
         expect(bearerResponse.status).toBe(200);
         done();
@@ -94,7 +91,7 @@ describe('Auth Router', () => {
     });
 
     describe('bad logins', () => {
-      it('basic fails with known user and wrong password ', async (done) => {
+      it('basic fails with known user and wrong password ', async () => {
 
         const response = await mockRequest.post('/signin')
           .auth('admin', 'xyz');
@@ -103,7 +100,6 @@ describe('Auth Router', () => {
         expect(response.status).toBe(403);
         expect(userObject.user).not.toBeDefined();
         expect(userObject.token).not.toBeDefined();
-        done();
       });
 
       it('basic fails with unknown user', async (done) => {
@@ -124,7 +120,7 @@ describe('Auth Router', () => {
           .get('/users')
           .set('Authorization', `Bearer foobar`);
 
-        expect(bearerResponse.status).toBe(403);
+        expect(bearerResponse.status).toBe(500);
         done();
       });
     });
