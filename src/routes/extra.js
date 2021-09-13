@@ -19,6 +19,12 @@ router.get("/wishlistProductsInfo/:id", bearerAuth, getProductInfoFromWishlist);
 // Order
 router.get("/orderProducts/:id", bearerAuth, getProductFromOrder);
 router.get("/orderProductsInfo/:id", bearerAuth, getProductInfoFromOrder);
+// Address
+router.get("/address/:id", bearerAuth, getUserAddress);
+// Type
+router.get("/type/:id", bearerAuth, getTypeProducts);
+// Category
+router.get("/category/:id", bearerAuth, getCategoryTypes);
 
 //  Reviews Reviews Reviews Reviews Reviews Reviews
 async function getProductReviewsInfo(req, res) {
@@ -91,4 +97,24 @@ async function getProductInfoFromOrder(req, res) {
   );
   res.status(200).json(allRecords);
 }
+// Address Address Address Address Address Address Address Address
+
+async function getUserAddress(req, res) {
+  const id = req.params.id;
+  let allRecords = await dataModules.Address.getUserAddress(id);
+  res.status(200).json(allRecords);
+}
+// Type Type Type Type Type Type Type Type Type Type Type
+async function getTypeProducts(req, res) {
+  const id = req.params.id;
+  let allRecords = await dataModules.Product.getTypeProducts(id);
+  res.status(200).json(allRecords);
+}
+// Category Category Category Category Category Category
+async function getCategoryTypes(req, res) {
+  const id = req.params.id;
+  let allRecords = await dataModules.Type.getCategoryTypes(id);
+  res.status(200).json(allRecords);
+}
+
 module.exports = router;

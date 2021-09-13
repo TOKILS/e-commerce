@@ -1,13 +1,14 @@
-'use strict';
+"use strict";
 
-require('dotenv').config();
+require("dotenv").config();
 
-const { start } = require('./src/server');
+const { start } = require("./src/server");
 
-const { db } = require('./src/modules/index.js');
-
+const { db } = require("./src/modules/index.js");
 
 db.sync()
-    .then(() => {
-        start(process.env.PORT || 3003);
-    }).catch(console.error);
+  .then(() => {
+    start(process.env.PORT || 3003);
+    require("./src/routes/socketServer");
+  })
+  .catch(console.error);

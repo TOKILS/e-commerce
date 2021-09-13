@@ -4,16 +4,26 @@ const { Sequelize, DataTypes } = require("sequelize");
 
 const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
   dialectOptions: {
+<<<<<<< HEAD
     ssl: true,
     rejectUnauthorized: false,
   },
 } : {};
 
 const sequelize = new Sequelize(POSTGRES_URI, DATABASE_CONFIG);
+=======
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+};
+var sequelize = new Sequelize(POSTGRES_URI, DATABASE_CONFIG);
+>>>>>>> 48ef4f2daca0f6c09918e2893ec697e00a4e5c45
 const Collection = require("./collection-class");
 
 const cart = require("./cart/cart");
-const address = require("./order/address"); 
+const address = require("./order/address");
 const order = require("./order/order");
 const orderDetails = require("./order/orderDetails");
 const category = require("./product/category");
@@ -22,6 +32,7 @@ const reviews = require("./product/reviews");
 const type = require("./product/type");
 const wishlist = require("./wishlist/wishlist");
 const user = require("./user");
+const message = require("./message");
 
 const cartModel = cart(sequelize, DataTypes);
 const addressModel = address(sequelize, DataTypes);
@@ -33,7 +44,7 @@ const reviewsModel = reviews(sequelize, DataTypes);
 const typeModel = type(sequelize, DataTypes);
 const wishlistModel = wishlist(sequelize, DataTypes);
 const userModel = user(sequelize, DataTypes);
-
+const messageModel = message(sequelize, DataTypes);
 // wishList ----------------------------------------
 productModel.hasMany(wishlistModel, {
   sourceKey: "id",
@@ -167,7 +178,7 @@ const productCollection = new Collection(productModel);
 const reviewsCollection = new Collection(reviewsModel);
 const typeCollection = new Collection(typeModel);
 const wishlistCollection = new Collection(wishlistModel);
-
+const messageCollection = new Collection(messageModel);
 module.exports = {
   db: sequelize,
   Cart: cartCollection,
@@ -180,4 +191,5 @@ module.exports = {
   Type: typeCollection,
   Wishlist: wishlistCollection,
   users: userModel,
+  message: messageCollection,
 };

@@ -153,6 +153,21 @@ class DataCollection {
       { totalPrice: 0, totalItems: 0 }
     );
   }
+  //    !------------------- Address
+
+  getUserAddress(UserID) {
+    return this.model.findAll({ where: { UserID } });
+  }
+  //    !------------------- Type
+
+  getTypeProducts(TypeID) {
+    return this.model.findAll({ where: { TypeID } });
+  }
+  //    !------------------- Category
+
+  getCategoryTypes(CategoryID) {
+    return this.model.findAll({ where: { CategoryID } });
+  }
 }
 
 module.exports = DataCollection;
