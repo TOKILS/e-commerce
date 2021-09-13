@@ -1,7 +1,6 @@
 "use strict";
 
 const uuid = require("uuid").v4; // random uuid
-const bearerIo = require("./middleware/bearer-io.js");
 
 // 3rd Party Resources
 require("dotenv").config();
@@ -17,54 +16,40 @@ const loggerMiddleware = require("./middleware/logger");
 const authRoutes = require("./routes/authRoutes.js");
 const v2Routes = require("./routes/v2.js");
 const { message } = require("./modules/index.js"); // message Model Class
+const { getAll, received, addToQueue } = require("./messageQueue.js");
 
 // Prepare the express app
 const app = express();
 
-// Message Queue
-const messageQueue = {};
-io.use(bearerIo);
+// io.use(bearerIo);
 
 // setting up socket.io
 io.on("connection", (socket) => {
   console.log("new user connected");
-  console.log("socket id : ", socket.id);
 
-  socket.on("recieveMessage", (message) => {});
+  let roomId = socket.handshake.auth.roomId;
+  socket.join(roomId);
 
-  // /* when a user connects, make a room and add it with the email of the user to the object userRooms */
-  // let newRoomID = uuid();
-  // socket.join(newRoomID);
+  // retrive All missed messages
+  socket.on("getPrevMessages", (email) => {
+    const messagesArray = getAll(email);
 
-  // // check if the user has any messages in the message queue
-  // if (messageQueue[socket.bearerAuthObj.email]) {
-  //   messageQueue[socket.bearerAuthObj.email].roomId = newRoomID;
-  // } else {
-  //   messageQueue[socket.bearerAuthObj.email] = {
-  //     roomId: newRoomID,
-  //     messages: [],
-  //   };
-  // }
+  });
 
-  // // front end will have a "receive-room-data" io event
-  // socket.emit("receive-room-data", {
-  //   data: messageQueue[socket.bearerAuthObj.email],
-  // });
+  // adding new message to queue
+  socket.on("newMessage", (payload) => {
+    addToQueue(payload);
+  });
 
-  // /* when a front end wants to send a message it will emit to the message-send event */
-  // socket.on("message-send", async (payload) => {
-  //   /* payload = {
-  //     message: "message here",
-  //     email: "email here",
-  //     roomID: "uuid here",
-  //   } */
-  //   io.to(payload.roomId).emit("message-receive", payload.message);
-  //   /* this event is to send the previous message to the room they're in */
-  //   // save message to database
-  //   await messageModel.create(payload);
-  //   // save message to message queue
-  //   messageQueue[socket.bearerAuthObj.email].message.push(payload.message);
-  // });
+  // send incoming message to all room members
+  io.sockets
+    .in(roomId)
+    .emit("IncomingMessage", `what is going on, party people? ${roomId}`);
+
+  // listning for recieved messages to delete
+  socket.on("messageRecieved", (email) => {
+    received(email);
+  });
 });
 
 // App Level MW

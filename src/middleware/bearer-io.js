@@ -11,6 +11,7 @@ module.exports = async (socket, next) => {
     // const validUser = await users.authenticateToken(token);
 
     // socket.bearerAuthObj = validUser;
+    console.log('Over Here', socket.handshake.auth.email);
     socket.bearerAuthObj = socket.handshake.auth.email;
     next();
   } catch (e) {
