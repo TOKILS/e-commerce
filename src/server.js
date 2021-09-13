@@ -3,7 +3,7 @@
 // 3rd Party Resources
 const express = require("express");
 const cors = require("cors");
-const http = require("http");
+require('dotenv').config();
 
 // Esoteric Resources
 const notFoundHandler = require("./error-handlers/404");
@@ -16,8 +16,13 @@ const extra = require("./routes/extra");
 // Prepare the express app
 const socket_io = require("socket.io");
 const app = express();
-let server = http.createServer(app);
-let io = socket_io(server);
+
+var http = require('http').Server(app);
+var socketio = require('socket.io')
+
+
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
 
 // App Level MW
 app.use(cors());
@@ -28,6 +33,20 @@ app.use(loggerMiddleware);
 app.get("/", (req, res) => {
   res.status(200).send("Hello 👋 🖥 server");
 });
+
+
+app.get('/client', (req, res) => {
+
+  res.sendFile(__dirname + '/ticketing/views/index.html')
+
+})
+
+app.get('/admin', (req, res) => {
+
+  res.sendFile(__dirname + '/ticketing/views/admin.html')
+
+})
+
 
 app.get("/bad", (req, res, next) => {
   next("Error Bad End Point");
@@ -41,13 +60,18 @@ app.use("/api/v3", extra);
 app.use("*", notFoundHandler);
 app.use(errorHandler);
 
-const start = (PORT) => {
-  server.listen(PORT, () => {
-    console.log(`Server is Running on Port ${PORT}`);
-  });
-};
+const port = process.env.PORT
+
+const server = app.listen(port, () => {
+  console.log(`server is running ${port}`)
+
+})
+
+const io = socketio(server)
+
+
 module.exports = {
-  server: app,
-  start: start,
   io: io,
 };
+
+
