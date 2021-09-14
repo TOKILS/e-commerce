@@ -1,8 +1,10 @@
 "use strict";
 const express = require("express");
+const io = require('socket.io-client');
 const dataModules = require("../modules/index.js");
 const bearerAuth = require("../middleware/bearer.js");
 const permissions = require("../middleware/acl.js");
+const socket = io.connect(`http://localhost:3001/notify`);
 const router = express.Router();
 router.param("model", (req, res, next) => {
   const modelName = req.params.model;
@@ -41,10 +43,15 @@ async function handleCreate(req, res) {
   try {
     let obj = req.body;
     let newRecord = await req.model.create(obj);
+    const modelName = req.params.model;
+    if (modelName === 'Order') {
+      socket.emit('Order', newRecord)
+    }
     res.status(201).json(newRecord);
   } catch (error) {
     res.status(500).json("Record not Found");
   }
+
 }
 async function handleUpdate(req, res) {
   try {
