@@ -2,17 +2,39 @@
 console.log("client.js is running");
 
 // ? consts and variables
-const form = document.getElementById("form");
+const messageForm = document.getElementById("form");
 const messageInput = document.getElementById("message-input");
 
-const form2 = document.getElementById("form2");
+const roomForm = document.getElementById("form2");
 const roomInput = document.getElementById("room-input");
 
 const socket = io("http://localhost:3050");
 
-let email = "suhaibersan@gmail.com";
+let email = "";
 
-form.addEventListener("submit", (e) => {
+const emailForm = document.getElementById("email-form");
+const emailInput = document.getElementById("email-input");
+
+emailForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  email = emailInput.value;
+  if (email === "") return;
+  emailInput.value = "";
+
+  let issue = document.getElementById("issue-input");
+
+  document.getElementById("message-container").innerHTML = "";
+
+  await socket.emit("join-room", { email: email, issue: issue.value });
+  document.getElementById("email-form").remove();
+
+  setTimeout(() => {
+    displayMessage("a support staff will join you soon", "systemMessagesPositive");
+  }, 2500);
+});
+
+messageForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let message = messageInput.value;
   console.log();
@@ -20,22 +42,13 @@ form.addEventListener("submit", (e) => {
   if (message === "") return;
 
   displayMessage(message, "myMessages");
-  sendMessageToIo(message, "suhaibersan@gmail.com");
+  sendMessageToIo(message, email);
   messageInput.value = "";
-});
-
-form2.addEventListener("submit", (e) => {
-  e.preventDefault();
-  let room = roomInput.value;
-
-  socket.emit("join-specific-room", room)
 });
 
 // ? socket code portion
 // ! things to do when connected
-socket.on("connect", async () => {
-  await socket.emit("join-room", { email: email });
-});
+socket.on("connect", async () => {});
 
 // ! socket.io send and receive
 function sendMessageToIo(message) {
@@ -44,11 +57,15 @@ function sendMessageToIo(message) {
 socket.on("receive-message", (payload) => {
   /* payload = {
       message: "message here",
-      email: "email here",
-      roomID: "uuid here",
-      messageType: "forMeMessages"
+      messageType: "forMeMessages",
+      drawMessage: "true"
     } */
-  displayMessage(payload.message, payload.messageType);
+  console.log("receive-message ran with drawMessage = ", payload.drawMessage);
+  if (payload.drawMessage === "true") {
+    displayMessage(payload.message, payload.messageType);
+  } else {
+    displayMessage("you are not in an active room", "systemMessages");
+  }
 });
 
 socket.on("info", (payload) => {
@@ -57,8 +74,8 @@ socket.on("info", (payload) => {
 
 socket.on("receive-old-messages", (payload) => {
   for (let i = 0; i < payload.messages.length; i++) {
-    displayMessage(payload.messages[i], 'forMeMessages');
-  }  
+    displayMessage(payload.messages[i], "myMessages");
+  }
 });
 
 // ! function to write messages to the HTML
@@ -66,10 +83,12 @@ function displayMessage(message, classType = "systemMessages") {
   let divContainer = document.createElement("div");
   if (classType === "myMessages") {
     divContainer.setAttribute("class", "myMessagesContainer");
-  } else if (classType === "systemMessages") {
-    divContainer.setAttribute("class", "systemMessagesContainer");
-  } else {
+  } else if (classType === "forMeMessages") {
     divContainer.setAttribute("class", "forMeMessagesContainer");
+  } else if (classType === "systemMessagesPositive") {
+    divContainer.setAttribute("class", "systemMessagesPositiveContainer");
+  } else {
+    divContainer.setAttribute("class", "systemMessagesContainer");
   }
 
   let div = document.createElement("div");

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./client.css" />
   </head>
   <body>
+    <!-- email-form -->
     <div id="message-container_container">
       <div id="container">
         <div id="message-container"></div>
@@ -21,10 +22,18 @@
           <input type="text" id="message-input" />
           <button type="submit" id="send-button">Send</button>
         </form>
-        <form id="form2">
-          <label for="room-input">Message</label>
-          <input type="text" id="room-input" />
-          <button type="submit" id="room-button">select</button>
+        <form id="email-form">
+          <div>
+            <label for="email-input">Email</label>
+            <input type="text" id="email-input" />
+          </div>
+          <div>
+            <label for="issue-input">Your issue</label>
+            <input type="text" id="issue-input" />
+          </div>
+          <div>
+            <button type="submit" id="email-button">Submit a ticket</button>
+          </div>
         </form>
       </div>
     </div>

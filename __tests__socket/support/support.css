@@ -6,7 +6,7 @@ body {
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -23,11 +23,13 @@ body {
 #message-container_container {
   overflow: auto;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column-reverse;
 }
 #message-container {
   height: 75vh;
-  width: 500px;
+  width: 35vw;
 
   margin-bottom: 0.84rem;
 
@@ -40,6 +42,11 @@ body {
   cursor: text;
 
   padding: 1rem;
+  
+  border: rgb(93, 187, 241) solid;
+
+  border-top-left-radius:  1rem;
+  border-top-right-radius: 1rem;
 }
 
 .myMessagesContainer {
@@ -92,6 +99,24 @@ body {
   border-radius: 0.3rem;
   /* border-left: rgb(0, 0, 0) solid 0.85rem; */
 }
+.systemMessagesPositiveContainer {
+  width: 70%;
+
+  margin-right: auto;
+  margin-left: auto;
+
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  color: rgba(255, 255, 255, 0.74);
+  padding: 1rem;
+  background-color: rgba(49, 173, 105, 0.925);
+
+  text-align: center;
+
+  border-radius: 0.3rem;
+  /* border-left: rgb(0, 0, 0) solid 0.85rem; */
+}
 
 #form {
   display: flex;
@@ -107,15 +132,17 @@ body {
   padding: 0rem 0.75rem;
   font-size: 18px;
 
-  /* margin-left: 1rem; */
+  width: 50px;
 
-  /* width: 50%; */
-  background-color: rgb(235, 235, 235);
+  width: auto;
+
+
+  background-color: #ebebeb;
 
   border: none;
   outline: none;
 
-  flex-grow: 3;
+  flex-shrink: 3!important;
 }
 #form #send-button {
   height: 2.5rem;
@@ -134,4 +161,85 @@ body {
 
 #form #send-button:hover {
   background-color: rgb(142, 223, 196);
+}
+
+#roomSelect-container_container {
+  overflow: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+}
+#roomSelectContainer {
+  height: 81vh;
+  width: 500px;
+
+  margin-bottom: 0.84rem;
+
+  background-color: rgb(235, 235, 235);
+    
+
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  cursor: text;
+
+  padding: 1rem;
+
+  margin: 1rem;
+
+  border: rgb(241, 93, 126) solid;
+  border-radius: 1rem;
+}
+#roomsDivsContainer {
+  top: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.roomDiv {
+  border-top: solid tomato;
+  margin: 1rem;
+
+  padding-top: 0.5rem;
+
+  color: rgba(0, 0, 0, 0.829);
+}
+
+.buttonsContainer {
+  display: flex;
+
+  justify-content: space-between;
+}
+.joinRoomButton {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+
+  color: rgba(255, 255, 255, 0.884);
+  background-color: rgb(92, 173, 146);
+  cursor: pointer;
+
+  transition: 0.05s;
+}
+.joinRoomButton:hover {
+  background-color: rgb(157, 224, 202);
+}
+
+.closeRoomButton {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+
+  color: rgba(255, 255, 255, 0.884);
+  background-color: rgb(241, 93, 126);
+  cursor: pointer;
+
+  transition: 0.05s;
+}
+.closeRoomButton:hover {
+  background-color: rgb(175, 37, 67);
 }
