@@ -2,6 +2,7 @@
 
 console.log("server started");
 
+// const {io} = require('../../src/server')
 const io = require("socket.io")(3050, { cors: { origin: "*" } });
 
 const uuid = require("uuid").v4; // random uuid

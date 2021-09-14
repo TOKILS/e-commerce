@@ -22,12 +22,27 @@ let io = socket_io(server);
 // App Level MW
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
+
 
 app.use(loggerMiddleware);
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello 👋 🖥 server");
 });
+
+
+app.get('/client', (req, res) => {
+
+  res.sendFile(__dirname + '/__tests__socket/client/index.html')
+
+})
+
+app.get('/support', (req, res) => {
+
+  res.sendFile(__dirname + '/__tests__socket/support/index.html')
+
+})
 
 app.get("/bad", (req, res, next) => {
   next("Error Bad End Point");

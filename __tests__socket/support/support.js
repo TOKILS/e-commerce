@@ -77,18 +77,16 @@ function joinRoomFun(e) {
   e.preventDefault();
   let email = e.target.getAttribute("emailInfo");
   let room = e.target.getAttribute("roomInfo");
-  
-  document.getElementById("message-container").innerHTML = "";
-  socket.emit("join-specific-room", {email, room});
 
-  
+  document.getElementById("message-container").innerHTML = "";
+  socket.emit("join-specific-room", { email, room });
 }
 function closeRoomFun(e) {
   e.preventDefault();
   let email = e.target.getAttribute("emailInfo");
   let room = e.target.getAttribute("roomInfo");
-  
-  socket.emit("close-specific-room", {email, room});
+
+  socket.emit("close-specific-room", { email, room });
 
   e.target.parentNode.parentNode.remove();
 }
@@ -99,44 +97,41 @@ function displayRooms(email, room, issue) {
   mainDiv.setAttribute("class", "roomDiv");
   roomsDivsContainer.append(mainDiv);
 
-  let textContainerDiv = document.createElement("div"); 
+  let textContainerDiv = document.createElement("div");
   textContainerDiv.setAttribute("class", "textContainerDiv");
   mainDiv.appendChild(textContainerDiv);
 
-  
   let roomTextDiv = document.createElement("div");
   roomTextDiv.textContent = `room: ${room}`;
   textContainerDiv.appendChild(roomTextDiv);
 
-  let emailTextDiv = document.createElement("div"); 
+  let emailTextDiv = document.createElement("div");
   emailTextDiv.textContent = `email: ${email}`;
   textContainerDiv.appendChild(emailTextDiv);
 
-  let issueTextDiv = document.createElement("div"); 
+  let issueTextDiv = document.createElement("div");
   issueTextDiv.textContent = `issue: ${issue}`;
   textContainerDiv.appendChild(issueTextDiv);
 
-
-  let buttonsContainer = document.createElement("div"); 
+  let buttonsContainer = document.createElement("div");
   buttonsContainer.setAttribute("class", "buttonsContainer");
   mainDiv.appendChild(buttonsContainer);
 
-  let joinRoomButton = document.createElement("div"); 
+  let joinRoomButton = document.createElement("div");
   joinRoomButton.textContent = "join room";
   joinRoomButton.setAttribute("class", "joinRoomButton");
   joinRoomButton.setAttribute("emailInfo", email);
   joinRoomButton.setAttribute("roomInfo", room);
   buttonsContainer.appendChild(joinRoomButton);
-  joinRoomButton.addEventListener("click", joinRoomFun)
+  joinRoomButton.addEventListener("click", joinRoomFun);
 
-  let closeRoomButton = document.createElement("div"); 
+  let closeRoomButton = document.createElement("div");
   closeRoomButton.textContent = "close room";
   closeRoomButton.setAttribute("class", "closeRoomButton");
   closeRoomButton.setAttribute("emailInfo", email);
   closeRoomButton.setAttribute("roomInfo", room);
   buttonsContainer.appendChild(closeRoomButton);
-  closeRoomButton.addEventListener("click", closeRoomFun)
-
+  closeRoomButton.addEventListener("click", closeRoomFun);
 }
 // ! function to write messages to the HTML
 function displayMessage(message, classType = "systemMessages") {
@@ -157,7 +152,9 @@ function displayMessage(message, classType = "systemMessages") {
   divContainer.append(div);
   let first = document.getElementById("message-container");
   if (first.firstChild) {
-    document.getElementById("message-container").insertBefore(divContainer, first.firstChild);
+    document
+      .getElementById("message-container")
+      .insertBefore(divContainer, first.firstChild);
   } else {
     document.getElementById("message-container").append(divContainer);
   }
