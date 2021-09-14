@@ -72,6 +72,7 @@ const io = socketio(server)
 
 module.exports = {
   io: io,
+  server: app,
 };
 
 

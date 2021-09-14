@@ -9,52 +9,52 @@ const { db } = require("../src/modules/index.js");
 const mockRequest = supertest(server);
 
 let users = {
-  admin: {
-    username: "admin",
-    firstname: "admin",
-    lastname: "admin",
-    password: "password",
-    email: "admin@gmail.com",
-    role: "admin",
-  },
-  // vendor: {
-  //   username: "vendor",
-  //   firstname: "admin",
-  //   lastname: "admin",
-  //   password: "password",
-  //   email: "vendor@gmail.com",
-  //   role: "vendor"
-  // },
-  // user: {
-  //   username: "user",
-  //   firstname: "user",
-  //   lastname: "user",
-  //   password: "password",
-  //   email: "user@gmail.com",
-  //   role: "user"
-  // },
+admin: {
+username: "admin",
+firstname: "admin",
+lastname: "admin",
+password: "password",
+email: "admin@gmail.com",
+role: "admin",
+},
+// vendor: {
+// username: "vendor",
+// firstname: "admin",
+// lastname: "admin",
+// password: "password",
+// email: "vendor@gmail.com",
+// role: "vendor"
+// },
+// user: {
+// username: "user",
+// firstname: "user",
+// lastname: "user",
+// password: "password",
+// email: "user@gmail.com",
+// role: "user"
+// },
 };
 
 beforeAll(async () => {
-  await db.sync();
+await db.sync();
 });
 // afterAll(async (done) => {
-//   await db.drop();
-//   done();
+// await db.drop();
+// done();
 // });
 
 describe("Auth Router", () => {
-  Object.keys(users).forEach((userType) => {
-    describe(`${userType} users`, () => {
-      it("can't create one", async (done) => {
-        const response = await mockRequest
-          .post("/signup")
-          .send(users[userType]);
-        const userObject = response.body;
-        console.log(">>>>>>>>>>>>%%%%%%%%", userObject);
-        expect(response.status).toBe(500);
-        expect(userObject.error).toBeDefined();
-        expect(userObject.message).toBeDefined();
+Object.keys(users).forEach((userType) => {
+describe(`${userType} users`, () => {
+it("can't create one", async (done) => {
+const response = await mockRequest
+.post("/signup")
+.send(users[userType]);
+const userObject = response.body;
+console.log(">>>>>>>>>>>>%%%%%%%%", userObject);
+expect(response.status).toBe(500);
+expect(userObject.error).toBeDefined();
+expect(userObject.message).toBeDefined();
 
         done();
       });
@@ -118,5 +118,6 @@ describe("Auth Router", () => {
         done();
       });
     });
-  });
+
+});
 });
