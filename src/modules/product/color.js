@@ -1,8 +1,8 @@
 "use strict";
 
-const Product = (sequelize, DataTypes) =>
-  sequelize.define("Product", {
-    TypeID: {
+const Color = (sequelize, DataTypes) =>
+  sequelize.define("Color", {
+    ProductID: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -10,17 +10,14 @@ const Product = (sequelize, DataTypes) =>
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Description: {
+    Code: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    Price: {
-      type: DataTypes.INTEGER,
+    Image: {
+      type: DataTypes.STRING,
       allowNull: false,
-    },
-    Discount: {
-      type: DataTypes.INTEGER,
     },
   });
 
-module.exports = Product;
+module.exports = Color;
