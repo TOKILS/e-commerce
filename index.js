@@ -1,7 +1,5 @@
 "use strict";
 
-require("dotenv").config();
-
 const { db } = require("./src/modules/index.js");
 
 db.sync()

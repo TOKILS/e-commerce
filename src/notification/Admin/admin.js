@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 const io = require('socket.io-client');
-const connectionToNotify = io.connect(`http://localhost:3001/notify`);
+const connectionToNotify = io.connect(`${process.env.HOST}/notify`);
 
 connectionToNotify.emit('getAll')
 
