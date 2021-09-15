@@ -1,6 +1,6 @@
 (function connect() {
     console.log("support.js is running");
-    require('dotenv').config();
+    // require('dotenv').config();
     // ? consts and variables
     const form = document.getElementById("form");
     const messageInput = document.getElementById("message-input");
@@ -11,7 +11,7 @@
     const roomsDivsContainer = document.getElementById("roomsDivsContainer");
 
 
-    const socket = io(`${process.env.HOST}`);
+    const socket = io();
 
     let email = `${Math.random()}`;
 
