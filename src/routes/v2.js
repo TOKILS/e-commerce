@@ -1,6 +1,6 @@
 "use strict";
 const express = require("express");
-const io = require('socket.io-client');
+const io = require("socket.io-client");
 const dataModules = require("../modules/index.js");
 const bearerAuth = require("../middleware/bearer.js");
 const permissions = require("../middleware/acl.js");
@@ -44,14 +44,22 @@ async function handleCreate(req, res) {
     let obj = req.body;
     let newRecord = await req.model.create(obj);
     const modelName = req.params.model;
-    if (modelName === 'Order') {
-      socket.emit('Order', newRecord)
+    if (modelName === "OrderDetails") {
+      let {Quantity:quantity} = await dataModules.Product.get(req.body.ProductID)
+        ;
+      await dataModules.Product.update(req.body.ProductID, {
+        Quantity: --quantity,
+      });
+      console.log(req.body);
+    }
+    if (modelName === "Order") {
+      socket.emit("Order", newRecord);
     }
     res.status(201).json(newRecord);
   } catch (error) {
+    console.log(error);
     res.status(500).json("Record not Found");
   }
-
 }
 async function handleUpdate(req, res) {
   try {

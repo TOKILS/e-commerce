@@ -18,6 +18,10 @@ const Product = (sequelize, DataTypes) =>
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    Quantity: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+    },
     Discount: {
       type: DataTypes.INTEGER,
     },
