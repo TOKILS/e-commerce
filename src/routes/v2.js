@@ -42,16 +42,21 @@ async function handleGetOne(req, res) {
 async function handleCreate(req, res) {
   try {
     let obj = req.body;
-    let newRecord = await req.model.create(obj);
+    let { Quantity: quantity } = await dataModules.Product.get(
+      req.body.ProductID
+    );
     const modelName = req.params.model;
-    if (modelName === "OrderDetails") {
-      let {Quantity:quantity} = await dataModules.Product.get(req.body.ProductID)
-        ;
-      await dataModules.Product.update(req.body.ProductID, {
-        Quantity: --quantity,
-      });
-      console.log(req.body);
+    if (modelName === "OrderDetails" ) {
+      if (quantity > 0) {
+        await dataModules.Product.update(req.body.ProductID, {
+          Quantity: --quantity,
+        });
+      } else { 
+        res.status(500).json('this product is out of stock');
+        return;
+      }
     }
+    let newRecord = await req.model.create(obj);
     if (modelName === "Order") {
       socket.emit("Order", newRecord);
     }
