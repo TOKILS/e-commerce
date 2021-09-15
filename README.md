@@ -1,70 +1,277 @@
-# e-commerce 1
+# ![cf](https://i.imgur.com/7v5ASc8.png) e-commerce
 
-## Group-1-mid-project
+## _Group-1, mid-project_
 
-## Name of Project : fashionable 
+[GitHub](https://github.com/TOKILS/e-commerce)
+
+[Heroku](https://mid-project-01.herokuapp.com/)
+
  
-- Summary of idea.
-  we will create something similer to this: https://www.livefashionable.com/collections/new-arrivals
-- What problem or pain point does it solve? a. Keep it high level without going into too much detail. (3-4 sentences is enough):
-` well sometimes you will need to buy clothes or shoes so we will offer you with best and easy to git it `
+# Fashionable 
 
-- Minimum Viable Product (MVP) definition.
-  What is the minimum required for you to present on your demo day?
-  ` Making sure everything is working `
-## Team members
+## ✨Team members✨
 
-Khaled Tahat (team leader).
-Laith Hayajneh.
-Suhaib Ersan.
-Tariq Abu-Laban.
-Ibrahim Sarayrah.
-Omar Al-azaizah.
+- Khaled Tahat (Team Leader).
+- Laith Hayajneh.
+- Suhaib Ersan.
+- Tariq Abu-Laban.
+- Ibrahim Sarayrah.
+- Omar Al-azaizah.
 
-## Project: Midterm Prep #1
+---
 
-- What are the key strengths of each person on the team?
-  Omar & Tariq : code machines.
-  Laith & Khaled : planning.
-  Suhaib & Ibrahim: Team work and problem solving.
-- What will your team do if one person is taking over the project and not letting the other members contribute?
-  will he must be a professional if he wants to do so, yet this is not allowed and a complaint report will be submitted to the instructor.
+## Configuration
 
-- How will you approach each other and the challenges of the project knowing that it is impossible for all members to be at the exact same place in understanding and skill level?
-  We all are going to try our best in helping each other by trying to answer any question that shows up, explain things if any felt lost or were not following and I will try to change the pairs every day to make sure every team member had the chance to work with every other team member.
+Configure the root of your repository with the following files and directories. Thoughfully name and organize any aditional configuration or module files.
 
-- How will you raise concerns to members who are not adequately contributing?
-  Will firstly try to talk to him and try to convince him that it is in his interest to work and think of things, after all if this came out with no good, a complaint report will be submitted to the instructor.
+-   **README.md** - contains documentation
+-   **.env** - contains env variables (should be git ignored)
+-   **.gitignore** - contains a  `.gitignore` file
+-   **.eslintrc** - contains the course linter configuratoin
+-   **.eslintignore** - contains the course linter ignore configuration
+-   **package.json** - contains npm package config
+    -   create a `test` script for running tests
+    -   create a `start` script for running your server
+-   **index.js** - the entry point for your application
+-   **src/** - contains your core application files and folders
+-   **\_\_test\_\_/** - contains unit tests
 
-- How and when will you escalate the conflict if your resolution attempts are unsuccessful?
-  If no way of mine can solve the conflict, a complaint report will be submitted to the instructor.
+---
 
-  - What hours will you be available to communicate?
-    10:00 am till 5:00 pm
+## Authrization
 
-- What platforms will you use to communicate (ie. Slack, phone …)?
-  Slack, Discord, Zoom
-- How often will you take breaks?
-  As needed, maybe every two hours.
-- What is your plan if you start to fall behind?
-  In this case we will push ourselves and work harder for more extra hours, and God does not burden a soul beyond its capacity. :)
-- How will you communicate after hours and on the weekend?
-  We can use Slack and we can create our Zoom meeting.
-- What is your strategy for ensuring everyone’s voice is heard?
-  Will leave notes in our Slack channel or we can use Zoom by raising hands and other interactions.
-- How will you ensure that you are creating a safe environment where everyone feels comfortable speaking up?
-  Everyone is a leader. Work Plan
-- What components of your project will live on GitHub?
-  Front-end, Back-end
-- How will you share the repository with your teammates?
-  We are all in the one organization on github,
-- What is your Git flow?
-  When a feature is complete it is merged into the develop branch
-- Will you be using a PR review workflow? If so, consider: How many people must review a PR?
-  At least 3 team members.
-- Who merges PRs?
-  The Leader or every one who pushes work but the presence of the user is a must.
-- How often will you merge?
-  As needed but usually At the end of the day.
-- How will you communicate that it’s time to merge?
-  Slack, and we will decide that in the Zoom meeting.
+-   users - READ
+
+-   vendor - READ/CREATE/UPDATE
+
+-   admin - READ/CREATE/UPDATE/DELETE
+
+---
+
+## Dependencies
+
+-   base-64
+
+-   bcrypt
+
+-   cors
+
+-   dotenv
+
+-   express
+
+-   jest
+
+-   jsonwebtoken
+
+-   pg
+
+-   supertest
+
+-   sequelize
+
+-   http
+
+-   ejs
+
+-   socket.io
+
+-   socket.io-client
+
+-   uuid
+
+---
+
+## Auth Routes
+
+| method      |                      link           |   Description            |
+| ----------- | ------------------------------------|--------------------------|
+|    POST     |  /signup                           | Signup       |
+|    POST     |  /signin                           |     Signin    |
+|    PUT     |  /updateAccount                              |    Update user recored |
+|    DELETE      |  /deleteAccount                           |Delete user recored|
+|    GET   |  /users                           |      Get all users for admin|
+|    GET   |  /secret                          |      Get The token and description for users|
+
+
+## Category Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Category                |    Create new Category  |
+|    GET      |  /api/v2/Category:id             |    Get specific category   |
+|    GET      | /api/v2/Category                 |    Get all category           |
+|    DELETE   |  /api/v2/Category:id             |   Delete specific category         |
+|   PUT       |  /api/v2/Category:id              |  update specific category            |
+|   PATCH       |  /api/v2/Category:id              |  update specific category            |
+
+## Type Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Type              |    Create new Type  |
+|    GET      |  /api/v2/Type:id             |    Get specific Type   |
+|    GET      | /api/v2/Type                 |    Get all Type           |
+|    DELETE   |  /api/v2/Type:id             |   Delete specific Type         |
+|   PUT       |  /api/v2/Type:id              |  update specific Type            |
+|   PATCH       |  /api/v2/Type:id              |  update specific Type            |
+
+## Product Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Product              |    Create new Product  |
+|    GET      |  /api/v2/Product:id             |    Get specific Product   |
+|    GET      | /api/v2/Product                 |    Get all Product           |
+|    DELETE   |  /api/v2/Product:id             |   Delete specific Product         |
+|   PUT       |  /api/v2/Product:id              |  update specific Product            |
+|   PATCH       |  /api/v2/Product:id              |  update specific Product            |
+
+## Color Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Color              |    Create new Color  |
+|    GET      |  /api/v2/Color:id             |    Get specific Color   |
+|    GET      | /api/v2/Color                 |    Get all Color           |
+|    DELETE   |  /api/v2/Color:id             |   Delete specific Color         |
+|   PUT       |  /api/v2/Color:id              |  update specific Color            |
+|   PATCH       |  /api/v2/Color:id              |  update specific Color            |
+
+## Size Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Size              |    Create new Size  |
+|    GET      |  /api/v2/Size:id             |    Get specific Size   |
+|    GET      | /api/v2/Size                 |    Get all Size           |
+|    DELETE   |  /api/v2/Size:id             |   Delete specific Size         |
+|   PUT       |  /api/v2/Size:id              |  update specific Size            |
+|   PATCH       |  /api/v2/Size:id              |  update specific Size            |
+
+## Image Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Image              |    Create new Image  |
+|    GET      |  /api/v2/Image:id             |    Get specific Image   |
+|    GET      | /api/v2/Image                 |    Get all Image           |
+|    DELETE   |  /api/v2/Image:id             |   Delete specific Image         |
+|   PUT       |  /api/v2/Image:id              |  update specific Image            |
+|   PATCH       |  /api/v2/Image:id              |  update specific Image            |
+
+## Reviews Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Reviews              |    Create new Reviews  |
+|    GET      |  /api/v2/Reviews:id             |    Get specific Reviews   |
+|    GET      | /api/v2/Reviews                 |    Get all Reviews           |
+|    DELETE   |  /api/v2/Reviews:id             |   Delete specific Reviews         |
+|   PUT       |  /api/v2/Reviews:id              |  update specific Reviews            |
+|   PATCH       |  /api/v2/Reviews:id              |  update specific Reviews            |
+
+## Cart Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Cart              |    Create new Cart  |
+|    GET      |  /api/v2/Cart:id             |    Get specific Cart   |
+|    GET      | /api/v2/Cart                 |    Get all Cart           |
+|    DELETE   |  /api/v2/Cart:id             |   Delete specific Cart         |
+|   PUT       |  /api/v2/Cart:id              |  update specific Cart            |
+|   PATCH       |  /api/v2/Cart:id              |  update specific Cart            |
+
+## Address Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Address              |    Create new Address  |
+|    GET      |  /api/v2/Address:id             |    Get specific Address   |
+|    GET      | /api/v2/Address                 |    Get all Address           |
+|    DELETE   |  /api/v2/Address:id             |   Delete specific Address         |
+|   PUT       |  /api/v2/Address:id              |  update specific Address            |
+|   PATCH       |  /api/v2/Address:id              |  update specific Address            |
+
+## Order Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Order              |    Create new Order  |
+|    GET      |  /api/v2/Order:id             |    Get specific Order   |
+|    GET      | /api/v2/Order                 |    Get all Order           |
+|    DELETE   |  /api/v2/Order:id             |   Delete specific Order         |
+|   PUT       |  /api/v2/Order:id              |  update specific Order            |
+|   PATCH       |  /api/v2/Order:id              |  update specific Order            |
+
+## OrderDetails Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/OrderDetails              |    Create new OrderDetails  |
+|    GET      |  /api/v2/OrderDetails:id             |    Get specific OrderDetails   |
+|    GET      | /api/v2/OrderDetails                 |    Get all OrderDetails           |
+|    DELETE   |  /api/v2/OrderDetails:id             |   Delete specific OrderDetails         |
+|   PUT       |  /api/v2/OrderDetails:id              |  update specific OrderDetails            |
+|   PATCH       |  /api/v2/OrderDetails:id              |  update specific OrderDetails            |
+
+## Wishlist Routes
+
+| method      |                    link   |   Description                        |
+| ----------- | --------------------------|--------------------------------------|
+|    POST     |  /api/v2/Wishlist              |    Create new Wishlist  |
+|    GET      |  /api/v2/Wishlist:id             |    Get specific Wishlist   |
+|    GET      | /api/v2/Wishlist                 |    Get all Wishlist           |
+|    DELETE   |  /api/v2/Wishlist:id             |   Delete specific Wishlist         |
+|   PUT       |  /api/v2/Wishlist:id              |  update specific Wishlist            |
+|   PATCH       |  /api/v2/Wishlist:id              |  update specific Wishlist            |
+
+## Extra Routes
+
+| method      |                      link           |   Description              |
+| ----------- | ------------------------------------|----------------------------|
+|    GET      |  /api/v3/reviews:id                              |  Get specific reviews  |
+|    GET      |  /api/v3/reviewsInfo:id                          | Get specific reviewsInfo|
+|    GET      |  /api/v3/cartProducts:id                         |    Get specific cartProducts |
+|    GET      |  /api/v3/cartProductsInfo:id                              |  Get specific cartProductsInfo  |
+|    GET      |  /api/v3/wishlistProducts:id                          | Get specific wishlistProducts|
+|    GET      |  /api/v3/wishlistProductsInfo:id                         |    Get specific wishlistProductsInfo |
+|    GET      |  /api/v3/orderProducts:id                              |  Get specific orderProducts  |
+|    GET      |  /api/v3/orderProductsInfo:id                          | Get specific orderProductsInfo|
+|    GET      |  /api/v3/address:id                         |    Get specific address |
+|    GET      |  /api/v3/type:id                         |    Get specific type |
+|    GET      |  /api/v3/category:id                         |    Get specific category |
+
+## UML
+
+ ![UML](Images/UML.jpg)
+
+##  ER diagram
+
+ ![Database_Diagram](Images/er.jpg)
+
+
+## Installation
+
+e-commerce requires [Node.js](https://nodejs.org/) v14+ to run.
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+cd e-commerce
+npm i
+npm start
+```
+
+For production environments...
+
+```sh
+npm install --production
+NODE_ENV=production node index
+```
+
+## License
+
+MIT
+
+**Free Software, Hell Yeah!**
