@@ -2,14 +2,16 @@
 
 ## Group-1-mid-project
 
-## Name of Project
-
+## Name of Project : fashionable 
+ 
 - Summary of idea.
   we will create something similer to this: https://www.livefashionable.com/collections/new-arrivals
-- What problem or pain point does it solve? a. Keep it high level without going into too much detail. (3-4 sentences is enough)
+- What problem or pain point does it solve? a. Keep it high level without going into too much detail. (3-4 sentences is enough):
+` well sometimes you will need to buy clothes or shoes so we will offer you with best and easy to git it `
+
 - Minimum Viable Product (MVP) definition.
   What is the minimum required for you to present on your demo day?
-
+  ` Making sure everything is working `
 ## Team members
 
 Khaled Tahat (team leader).

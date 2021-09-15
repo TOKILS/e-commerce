@@ -6,7 +6,7 @@ This Product introduce the basic operations and functionalities should be exists
 
 This app will ease the purchasing process of products whenever and whereever the customer was, gives the customer the freedom to choose with the availability of so many multiple options and make the payment process more easy and more secure.
 
-Why should we care about your product? well sometimes we give away free Guava, so if like Guava you should join us.
+Why should we care about your product? well sometimes you will need to buy clothes or shoes so we will offer you with best and easy to git it 
 
 ## Scope (In/Out)
 
@@ -18,7 +18,7 @@ In this web app you can :
 - create your own private account with your own Wallet.
 - navigate through countless categories of our products scope.
 - add your favoraite products to a wish list and you purchase.
-- can commente and rate the products.
+- can comment and rate the products.
 
 - `OUT - What will your product not do.`
 
@@ -28,10 +28,17 @@ there is nothing our app can not do :)
 <!-- Under Cinstruction -->
 What will your MVP functionality be?
 
-What are your stretch goals?
 
-Stretch
+What are your stretch goals?
+1-adding map feature : The client will see the status and the location  of his/her order in the map .
+2-Let the vendors sell there product on our website .
+3-Using S3 Images system 
+
+
 What stretch goals are you going to aim for?
+Adding map feature : The client will see the status and the location  of his/her order in the map .
+
+
 
 ## Functional Requirements
 
@@ -66,6 +73,6 @@ What stretch goals are you going to aim for?
 
 ## DataBase Diagram
 
-<img src="/home/kztahat/401-course/e-commerce/Images/Database Diagram.jpg"
+<img src="Images/Database Diagram.jpg"
        alt="Database diagram"
        style="float: left; margin-right: 10px;" />
