@@ -1,6 +1,6 @@
 (function connect() {
     console.log("client.js is running");
-    require('dotenv').config();
+    // require('dotenv').config();
     // ? consts and variables
     const messageForm = document.getElementById("form");
     const messageInput = document.getElementById("message-input");
@@ -8,7 +8,7 @@
     const roomForm = document.getElementById("form2");
     const roomInput = document.getElementById("room-input");
 
-    const socket = io(`${process.env.HOST}`);
+    const socket = io();
 
     let email = "";
 
