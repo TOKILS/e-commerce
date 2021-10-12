@@ -47,9 +47,9 @@ const userModel = (sequelize, DataTypes) => {
     },
     role: {
       type: DataTypes.ENUM("user", "vendor", "admin"),
-      required: true,
+      // required: true,
       defaultValue: "user",
-      allowNull: false,
+      // allowNull: false,
     },
     token: {
       type: DataTypes.VIRTUAL,
