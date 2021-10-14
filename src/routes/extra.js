@@ -8,22 +8,23 @@ const permissions = require("../middleware/acl.js");
 const router = express.Router();
 
 // reviews
-router.get("/reviewsInfo/:id",  getProductReviewsInfo);
-router.get("/reviews/:id",  getProductReviews);
+router.get("/reviewsInfo/:id", getProductReviewsInfo);
+router.get("/reviews/:id", getProductReviews);
 // Products
-router.get("/cartProducts/:id",  getProductFromCart);
-router.get("/cartProductsInfo/:id",  getProductInfoFromCart);
-router.get("/Products/:id",  getProducts);
+router.get("/cartProducts/:id", getProductFromCart);
+router.get("/cartProductsInfo/:id", getProductInfoFromCart);
+router.get("/Products/:id", getProducts);
+router.get("/Products", getProducts);
 // wishlist
-router.get("/wishlistProducts/:id",  getProductFromWishlist);
-router.get("/wishlistProductsInfo/:id",  getProductInfoFromWishlist);
+router.get("/wishlistProducts/:id", getProductFromWishlist);
+router.get("/wishlistProductsInfo/:id", getProductInfoFromWishlist);
 // Order
-router.get("/orderProducts/:id",  getProductFromOrder);
-router.get("/orderProductsInfo/:id",  getProductInfoFromOrder);
+router.get("/orderProducts/:id", getProductFromOrder);
+router.get("/orderProductsInfo/:id", getProductInfoFromOrder);
 // Address
-router.get("/address/:id",  getUserAddress);
+router.get("/address/:id", getUserAddress);
 // Type
-router.get("/type/:id",  getTypeProducts);
+router.get("/type/:id", getTypeProducts);
 // Category
 router.get("/category/:id", getCategoryTypes);
 
@@ -119,8 +120,9 @@ async function getCategoryTypes(req, res) {
 }
 async function getProducts(req, res) {
   const id = req.params.id;
+
   let allRecords = await dataModules.Product.getProducts(
-    id,
+    id == undefined ? false : id,
     dataModules.Color,
     dataModules.Image,
     dataModules.Size
