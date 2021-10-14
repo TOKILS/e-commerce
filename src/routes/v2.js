@@ -16,8 +16,8 @@ router.param("model", (req, res, next) => {
     next("Invalid Model");
   }
 });
-router.get("/:model", bearerAuth, handleGetAll);
-router.get("/:model/:id", bearerAuth, handleGetOne);
+router.get("/:model", handleGetAll);
+router.get("/:model/:id", handleGetOne);
 router.post("/:model", bearerAuth, permissions("create"), handleCreate);
 router.put("/:model/:id", bearerAuth, permissions("update"), handleUpdate);
 router.patch("/:model/:id", bearerAuth, permissions("update"), handleUpdate);
