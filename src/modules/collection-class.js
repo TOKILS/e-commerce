@@ -176,29 +176,61 @@ class DataCollection {
   }
   // --------------------------------------------
   async getProducts(id, color, image, size) {
-    let allRecords = await this.model.findAll({ where: { id } });
-    let finallRecords = await Promise.all(
-      allRecords.map(async (ele) => {
-        return {
-          ...ele.dataValues,
-          color: await color.getProductDetails(ele.id),
-        };
-      })
-    );
-    let x = await Promise.all(
-      finallRecords.map(
-        async (element) =>
-          await element.color.map(async (ele) => {
-            return await {
-              ...ele.dataValues,
-              image: await image.getColorDetails(ele.id),
-              size: await size.getColorDetails(ele.id),
-            };
-          })
-      )
-    );
+    // let allRecords = await this.model.findAll({ where: { id } });
+    // let finallRecords = await Promise.all(
+    //   allRecords.map(async (ele) => {
+    //     return {
+    //       ...ele.dataValues,
+    //       color: await color.getProductDetails(ele.id),
+    //     };
+    //   })
+    // );
+    // let x = await Promise.all(
+    //   finallRecords.map(
+    //     async (element) =>
+    //       await element.color.map(async (ele) => {
+    //         return await {
+    //           ...ele.dataValues,
+    //           image: await image.getColorDetails(ele.id),
+    //           size: await size.getColorDetails(ele.id),
+    //         };
+    //       })
+    //   )
+    // );
 
-    return x;
+    // let x = await Promise.all(
+    //   finallRecords.map(
+    //     async (element) =>
+    //       await element.color.map(async (ele) => {
+    //         return await {
+    //           ...ele.dataValues,
+    //           image: await image.getColorDetails(ele.id),
+    //           size: await size.getColorDetails(ele.id),
+    //         };
+    //       })
+    //   )
+    // );
+
+    if (condition) {
+      let product = await this.model
+        .findOne({ where: { id } })
+        .then((allRecords) =>
+          color
+            .getProductDetails(id)
+            .then((colors) => ({ ...allRecords.dataValues, color: colors }))
+        );
+      let imageAndSize = await Promise.all(
+        await product.color.map(async (ele) => {
+          return await {
+            ...ele.dataValues,
+            image: await image.getColorDetails(ele.id),
+            size: await size.getColorDetails(ele.id),
+          };
+        })
+      );
+
+      return { ...product, color: imageAndSize };
+    }
   }
 }
 
