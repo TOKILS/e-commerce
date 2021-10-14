@@ -8,24 +8,24 @@ const permissions = require("../middleware/acl.js");
 const router = express.Router();
 
 // reviews
-router.get("/reviewsInfo/:id", bearerAuth, getProductReviewsInfo);
-router.get("/reviews/:id", bearerAuth, getProductReviews);
+router.get("/reviewsInfo/:id",  getProductReviewsInfo);
+router.get("/reviews/:id",  getProductReviews);
 // Products
-router.get("/cartProducts/:id", bearerAuth, getProductFromCart);
-router.get("/cartProductsInfo/:id", bearerAuth, getProductInfoFromCart);
-router.get("/Products/:id", bearerAuth, getProducts);
+router.get("/cartProducts/:id",  getProductFromCart);
+router.get("/cartProductsInfo/:id",  getProductInfoFromCart);
+router.get("/Products/:id",  getProducts);
 // wishlist
-router.get("/wishlistProducts/:id", bearerAuth, getProductFromWishlist);
-router.get("/wishlistProductsInfo/:id", bearerAuth, getProductInfoFromWishlist);
+router.get("/wishlistProducts/:id",  getProductFromWishlist);
+router.get("/wishlistProductsInfo/:id",  getProductInfoFromWishlist);
 // Order
-router.get("/orderProducts/:id", bearerAuth, getProductFromOrder);
-router.get("/orderProductsInfo/:id", bearerAuth, getProductInfoFromOrder);
+router.get("/orderProducts/:id",  getProductFromOrder);
+router.get("/orderProductsInfo/:id",  getProductInfoFromOrder);
 // Address
-router.get("/address/:id", bearerAuth, getUserAddress);
+router.get("/address/:id",  getUserAddress);
 // Type
-router.get("/type/:id", bearerAuth, getTypeProducts);
+router.get("/type/:id",  getTypeProducts);
 // Category
-router.get("/category/:id", bearerAuth, getCategoryTypes);
+router.get("/category/:id", getCategoryTypes);
 
 //  Reviews Reviews Reviews Reviews Reviews Reviews
 async function getProductReviewsInfo(req, res) {
