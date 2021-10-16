@@ -10,6 +10,19 @@ const Cart = (sequelize, DataTypes) =>
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    ColorID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    SizeID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    Quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
   });
 
 module.exports = Cart;

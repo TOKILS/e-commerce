@@ -46,13 +46,13 @@ async function handleCreate(req, res) {
       req.body.ProductID
     );
     const modelName = req.params.model;
-    if (modelName === "OrderDetails" ) {
+    if (modelName === "OrderDetails") {
       if (quantity > 0) {
         await dataModules.Product.update(req.body.ProductID, {
           Quantity: --quantity,
         });
-      } else { 
-        res.status(500).json('this product is out of stock');
+      } else {
+        res.status(500).json("this product is out of stock");
         return;
       }
     }

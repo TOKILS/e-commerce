@@ -1,6 +1,6 @@
 "use strict";
 
-require('dotenv').config();
+require("dotenv").config();
 const POSTGRES_URI =
   process.env.NODE_ENV === "test" ? "sqlite:memory:" : process.env.DATABASE_URL;
 const { Sequelize, DataTypes } = require("sequelize");
@@ -85,7 +85,22 @@ cartModel.belongsTo(userModel, {
   foreignKey: "UserID",
   targetKey: "id",
 });
-
+sizeModel.hasMany(cartModel, {
+  sourceKey: "id",
+  foreignKey: "SizeID",
+});
+cartModel.belongsTo(sizeModel, {
+  foreignKey: "SizeID",
+  targetKey: "id",
+});
+colorModel.hasMany(cartModel, {
+  sourceKey: "id",
+  foreignKey: "ColorID",
+});
+cartModel.belongsTo(colorModel, {
+  foreignKey: "ColorID",
+  targetKey: "id",
+});
 // Reviews ----------------------------------------
 productModel.hasMany(reviewsModel, {
   sourceKey: "id",
@@ -151,6 +166,22 @@ orderDetailsModel.belongsTo(orderModel, {
   foreignKey: "OrderID",
   targetKey: "id",
 });
+sizeModel.hasMany(orderDetailsModel, {
+  sourceKey: "id",
+  foreignKey: "SizeID",
+});
+orderDetailsModel.belongsTo(sizeModel, {
+  foreignKey: "SizeID",
+  targetKey: "id",
+});
+colorModel.hasMany(orderDetailsModel, {
+  sourceKey: "id",
+  foreignKey: "ColorID",
+});
+orderDetailsModel.belongsTo(colorModel, {
+  foreignKey: "ColorID",
+  targetKey: "id",
+});
 
 // Product ----------------------------------------
 typeModel.hasMany(productModel, {
@@ -171,6 +202,7 @@ colorModel.belongsTo(productModel, {
   foreignKey: "ProductID",
   targetKey: "id",
 });
+
 // Size -------------------------
 colorModel.hasMany(sizeModel, {
   sourceKey: "id",
