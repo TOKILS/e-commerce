@@ -76,7 +76,17 @@ authRouter.get("/secret", bearerAuth, async (req, res, next) => {
 authRouter.get("/allusers", async (req, res, next) => {
   try {
     let allRecords = await users.findAll({});
-    res.status(200).json(allRecords);
+    let x = allRecords.map((ele) => ({
+      id: ele.id,
+      username: ele.username,
+      firstname: ele.firstname,
+      lastname: ele.lastname,
+      email: ele.email,
+      role: ele.role,
+      createdAt: ele.createdAt,
+    }));
+
+    res.status(200).json(x);
   } catch (e) {
     next(e.message);
   }
