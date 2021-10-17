@@ -4,8 +4,10 @@ const express = require("express");
 const dataModules = require("../modules/index.js");
 const bearerAuth = require("../middleware/bearer.js");
 const permissions = require("../middleware/acl.js");
+const { users } = require("../modules/index.js");
 
 const router = express.Router();
+//user
 
 // reviews
 router.get("/reviewsInfo/:id", getProductReviewsInfo);
@@ -49,7 +51,9 @@ async function getProductFromCart(req, res) {
   const id = req.params.id;
   let allRecords = await dataModules.Cart.getProductFromCart(
     id,
-    dataModules.Product
+    dataModules.Product,
+    dataModules.Color,
+    dataModules.Size
   );
   res.status(200).json(allRecords);
 }
@@ -85,7 +89,9 @@ async function getProductFromOrder(req, res) {
   let allRecords = await dataModules.Order.getProductFromOrder(
     id,
     dataModules.OrderDetails,
-    dataModules.Product
+    dataModules.Product,
+    dataModules.Color,
+    dataModules.Size
   );
   res.status(200).json(allRecords);
 }

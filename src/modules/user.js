@@ -72,7 +72,7 @@ const userModel = (sequelize, DataTypes) => {
       type: DataTypes.VIRTUAL,
       get() {
         const acl = {
-          user: ["read","create"],
+          user: ["read", "create"],
           vendor: ["read", "create", "update"],
           admin: ["read", "create", "update", "delete"],
         };
@@ -98,6 +98,10 @@ const userModel = (sequelize, DataTypes) => {
       return user;
     }
     throw new Error("Invalid User");
+  };
+  model.allUser = async function (username, password) {
+    const user = await this.findAll({});
+    return user;
   };
 
   model.authenticateToken = async function (token) {

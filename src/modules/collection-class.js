@@ -63,11 +63,16 @@ class DataCollection {
   }
   //    !------------------- Cart
 
-  async getProductFromCart(UserID, products) {
+  async getProductFromCart(UserID, products, colors, size) {
     let allRecords = await this.model.findAll({ where: { UserID } });
     let finallRecords = await Promise.all(
       allRecords.map(async (ele) => {
-        return await products.get(ele.ProductID);
+        return await {
+          ...ele.dataValues,
+          ProductID: await products.get(ele.ProductID),
+          ColorID: await colors.get(ele.ColorID),
+          SizeID: await size.get(ele.SizeID),
+        };
       })
     );
     return finallRecords;
@@ -123,12 +128,18 @@ class DataCollection {
         return await orderDetails.get(ele.OrderID);
       })
     );
-    let productsList = await Promise.all(
-      finallRecords[0].map(async (ele) => {
-        return await products.get(ele.ProductID);
-      })
-    );
-    return { productsList, orderState: allRecords[0].State };
+    // let productsList = await Promise.all(
+    //   finallRecords.map(
+    //     (fele) =>
+    //       await Promise.all(
+    //         fele.map(async (ele) => {
+    //           return await products.get(ele.ProductID);
+    //         })
+    //       )
+    //   )
+    // );
+    // return { productsList, orderState: allRecords[0].State };
+    return ture;
   }
 
   async getProductInfoFromOrder(UserID, orderDetails, products) {
