@@ -29,6 +29,8 @@ router.get("/address/:id", getUserAddress);
 router.get("/type/:id", getTypeProducts);
 // Category
 router.get("/category/:id", getCategoryTypes);
+// image
+router.get("/image/:id", getImageByColorID);
 
 //  Reviews Reviews Reviews Reviews Reviews Reviews
 async function getProductReviewsInfo(req, res) {
@@ -133,6 +135,13 @@ async function getProducts(req, res) {
     dataModules.Image,
     dataModules.Size
   );
+  res.status(200).json(allRecords);
+}
+
+async function getImageByColorID(req, res) {
+  const id = req.params.id;
+
+  let allRecords = await dataModules.Image.getImageByColorID(id);
   res.status(200).json(allRecords);
 }
 

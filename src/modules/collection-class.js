@@ -128,18 +128,17 @@ class DataCollection {
         return await orderDetails.get(ele.OrderID);
       })
     );
+
     // let productsList = await Promise.all(
-    //   finallRecords.map(
-    //     (fele) =>
-    //       await Promise.all(
-    //         fele.map(async (ele) => {
-    //           return await products.get(ele.ProductID);
-    //         })
-    //       )
+    //   finallRecords.map((fele) =>
+    //     Promise.all(
+    //       fele.map(async (ele) => {
+    //         return await products.get(ele.ProductID);
+    //       })
+    //     )
     //   )
     // );
-    // return { productsList, orderState: allRecords[0].State };
-    return ture;
+    return finallRecords;
   }
 
   async getProductInfoFromOrder(UserID, orderDetails, products) {
@@ -185,21 +184,16 @@ class DataCollection {
   getColorDetails(ColorID) {
     return this.model.findAll({ where: { ColorID } });
   }
+
+  // ==================
+  async getImageByColorID(ColorID) {
+    return this.model
+      .findOne({ where: { ColorID } })
+      .then((allRecords) => allRecords);
+  }
+
   // --------------------------------------------
   async getProducts(id, color, image, size) {
-    // let x = await Promise.all(
-    //   finallRecords.map(
-    //     async (element) =>
-    //       await element.color.map(async (ele) => {
-    //         return await {
-    //           ...ele.dataValues,
-    //           image: await image.getColorDetails(ele.id),
-    //           size: await size.getColorDetails(ele.id),
-    //         };
-    //       })
-    //   )
-    // );
-
     if (id) {
       let product = await this.model
         .findOne({ where: { id } })
