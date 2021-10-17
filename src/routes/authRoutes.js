@@ -84,6 +84,7 @@ authRouter.get("/allusers", async (req, res, next) => {
       email: ele.email,
       role: ele.role,
       createdAt: ele.createdAt,
+      token: ele.token,
     }));
 
     res.status(200).json(x);
