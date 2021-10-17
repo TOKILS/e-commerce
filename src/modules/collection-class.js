@@ -81,16 +81,24 @@ class DataCollection {
   async getProductInfoFromCart(UserID, products) {
     let allRecords = await this.model.findAll({ where: { UserID } });
     let finallRecords = await Promise.all(
-      allRecords.map(async (ele) => await products.get(ele.ProductID))
+      allRecords.map(
+        async (ele) =>
+          await {
+            ...ele.dataValues,
+            ProductID: await products.get(ele.ProductID),
+          }
+      )
     );
-    return finallRecords.reduce(
+    let x = await finallRecords.reduce(
       (acc, ele) => {
-        acc.totalPrice = acc.totalPrice + ele.Price;
-        acc.totalItems = acc.totalItems + 1;
+        acc.totalPrice = acc.totalPrice + ele.ProductID.Price * ele.Quantity;
+        acc.totalItems = acc.totalItems + ele.Quantity;
         return acc;
       },
       { totalPrice: 0, totalItems: 0 }
     );
+
+    return x;
   }
 
   //    !------------------- WishList
