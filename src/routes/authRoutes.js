@@ -29,7 +29,7 @@ authRouter.post("/signin", basicAuth, (req, res, next) => {
   res.status(200).json(user);
 });
 
-authRouter.post("/userinfo/:id", async (req, res, next) => {
+authRouter.get("/userinfo/:id", async (req, res, next) => {
   const id = req.params.id;
   let user = await users.findOne({ where: { id: id } });
 
