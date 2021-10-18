@@ -31,6 +31,7 @@ router.get("/type/:id", getTypeProducts);
 router.get("/category/:id", getCategoryTypes);
 // image
 router.get("/image/:id", getImageByColorID);
+router.delete("/cart/:id", clearCart);
 
 //  Reviews Reviews Reviews Reviews Reviews Reviews
 async function getProductReviewsInfo(req, res) {
@@ -145,6 +146,13 @@ async function getImageByColorID(req, res) {
   const id = req.params.id;
 
   let allRecords = await dataModules.Image.getImageByColorID(id);
+  res.status(200).json(allRecords);
+}
+
+async function clearCart(req, res) {
+  const id = req.params.id;
+
+  let allRecords = await dataModules.Cart.clearCart(id);
   res.status(200).json(allRecords);
 }
 

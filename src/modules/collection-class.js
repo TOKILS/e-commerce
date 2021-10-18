@@ -62,7 +62,9 @@ class DataCollection {
     return finallRecords;
   }
   //    !------------------- Cart
-
+  async clearCart(id) {
+    return this.model.destroy({ where: { UserID: id } });
+  }
   async getProductFromCart(UserID, products, colors, size) {
     let allRecords = await this.model.findAll({ where: { UserID } });
     let finallRecords = await Promise.all(
