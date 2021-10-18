@@ -66,7 +66,22 @@ wishlistModel.belongsTo(userModel, {
   foreignKey: "UserID",
   targetKey: "id",
 });
-
+sizeModel.hasMany(wishlistModel, {
+  sourceKey: "id",
+  foreignKey: "SizeID",
+});
+wishlistModel.belongsTo(sizeModel, {
+  foreignKey: "SizeID",
+  targetKey: "id",
+});
+colorModel.hasMany(wishlistModel, {
+  sourceKey: "id",
+  foreignKey: "ColorID",
+});
+wishlistModel.belongsTo(colorModel, {
+  foreignKey: "ColorID",
+  targetKey: "id",
+});
 // Cart ----------------------------------------
 productModel.hasMany(cartModel, {
   sourceKey: "id",

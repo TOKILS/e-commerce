@@ -32,10 +32,11 @@ authRouter.post("/signin", basicAuth, (req, res, next) => {
 authRouter.put("/updateAccount", bearerAuth, async (req, res, next) => {
   const id = req.userId;
   let userRecord = await users.findOne({ where: { id: id } });
-
   const output = req.body;
+  console.log("output =>", output);
   output.token = userRecord.token;
   const updateRecored = await userRecord.update(output);
+  console.log("updated =>", updateRecored);
   res.send(updateRecored);
 });
 
