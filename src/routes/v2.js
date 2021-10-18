@@ -21,7 +21,7 @@ router.get("/:model/:id", handleGetOne);
 router.post("/:model", bearerAuth, permissions("create"), handleCreate);
 router.put("/:model/:id", bearerAuth, permissions("update"), handleUpdate);
 router.patch("/:model/:id", bearerAuth, permissions("update"), handleUpdate);
-router.delete("/:model/:id", bearerAuth, permissions("delete"), handleDelete);
+router.delete("/:model/:id", bearerAuth, permissions("update"), handleDelete);
 async function handleGetAll(req, res) {
   try {
     let allRecords = await req.model.get();
