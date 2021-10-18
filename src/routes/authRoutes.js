@@ -29,6 +29,13 @@ authRouter.post("/signin", basicAuth, (req, res, next) => {
   res.status(200).json(user);
 });
 
+authRouter.post("/userinfo", (req, res, next) => {
+  const id = req.params.id;
+  let user = await users.findOne({ where: { id: id } });
+
+  res.status(200).json(user);
+});
+
 authRouter.put("/updateAccount", bearerAuth, async (req, res, next) => {
   const id = req.userId;
   let userRecord = await users.findOne({ where: { id: id } });
