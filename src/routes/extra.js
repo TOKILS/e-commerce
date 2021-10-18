@@ -72,7 +72,10 @@ async function getProductFromWishlist(req, res) {
   const id = req.params.id;
   let allRecords = await dataModules.Wishlist.getProductFromWishlist(
     id,
-    dataModules.Product
+    dataModules.Product,
+    dataModules.Color,
+    dataModules.Size,
+    dataModules.Image
   );
   res.status(200).json(allRecords);
 }

@@ -103,11 +103,17 @@ class DataCollection {
 
   //    !------------------- WishList
 
-  async getProductFromWishlist(UserID, products) {
+  async getProductFromWishlist(UserID, products, colors, size, Image) {
     let allRecords = await this.model.findAll({ where: { UserID } });
     let finallRecords = await Promise.all(
       allRecords.map(async (ele) => {
-        return await products.get(ele.ProductID);
+        return await {
+          ...ele.dataValues,
+          ProductID: await products.get(ele.ProductID),
+          ColorID: await colors.get(ele.ColorID),
+          SizeID: await size.get(ele.SizeID),
+          image: await Image.getColorDetails(ele.ColorID),
+        };
       })
     );
     return finallRecords;
