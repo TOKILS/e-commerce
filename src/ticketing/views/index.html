@@ -58,14 +58,15 @@
         }
 
         .myMessages {
-            width: 70%;
+            width: 100%;
 
             margin-left: auto;
             color: rgba(0, 0, 0, 0.877);
             padding: 0.5rem;
 
             text-align: right;
-            border-right: rgb(62, 109, 196) solid 0.85rem;
+            border-right: teal solid 0.85rem;
+            background-color: rgba(0, 0, 0, 0.103)
         }
 
         .forMeMessagesContainer {
@@ -90,6 +91,7 @@
 
         .systemMessages {
             width: 70%;
+            opacity: 0.8;
 
             margin-right: auto;
             margin-left: auto;
@@ -99,7 +101,7 @@
 
             color: rgba(0 0 0);
             padding: 1rem;
-            background-color: rgba(73 221 221 / 93%);
+            background-color: rgba(0, 128, 128, 0.466);
 
             text-align: center;
 
@@ -109,6 +111,7 @@
 
         .systemMessagesPositiveContainer {
             width: 70%;
+            opacity: 0.8;
 
             margin-right: auto;
             margin-left: auto;
@@ -116,9 +119,9 @@
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
 
-            color: rgba(255, 255, 255, 0.74);
+            color: black;
             padding: 1rem;
-            background-color: rgba(49, 173, 105, 0.925);
+            background-color: rgba(0, 128, 128, 0.466);
 
             text-align: center;
 
@@ -152,12 +155,13 @@
         }
 
         #form #send-button {
+            border-radius: 0.5rem;
             height: 2.5rem;
             padding: 0rem 2rem;
             font-size: 18px;
 
-            background-color: rgb(64 186 189);
-            color: rgba(0, 0, 0);
+            background-color: teal;
+            color:white;
             border: none;
 
             /* flex-grow: 1; */
@@ -167,7 +171,7 @@
         }
 
         #form #send-button:hover {
-            background-color: rgb(63 81 181);
+            opacity: 0.8;
         }
 
 
@@ -222,7 +226,7 @@
             /* margin-left: 1rem; */
 
             /* width: 50%; */
-            background-color: rgb(235, 235, 235);
+            background-color: rgba(147, 156, 147, 0.459);
 
             border: none;
             outline: none;
@@ -234,10 +238,12 @@
             height: 2.5rem;
             padding: 0rem 2rem;
             font-size: 18px;
-
-            background-color: rgb(92, 100, 173);
-            color: rgba(255, 255, 255, 0.822);
             border: none;
+
+            background-color: teal;
+            color: white;
+            border-radius: 0.5rem;
+
 
             /* flex-grow: 1; */
             cursor: pointer;
@@ -246,7 +252,7 @@
         }
 
         #email-form #email-button:hover {
-            background-color: rgb(56, 69, 185);
+            opacity: 0.8;
         }
     </style>
 
