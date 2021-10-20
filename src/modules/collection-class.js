@@ -136,14 +136,53 @@ class DataCollection {
   }
 
   //    !------------------- Order
-
-  async getProductFromOrder(UserID, orderDetails, products) {
+  async getOrderItems(id) {
+    let allRecords = await this.model.findAll({ where: { OrderID: id } });
+    return allRecords;
+  }
+  async getProductFromOrder(
+    UserID,
+    orderDetails,
+    products,
+    color,
+    size,
+    image
+  ) {
     let allRecords = await this.model.findAll({ where: { UserID } });
+    let Record = allRecords?.length ? allRecords[allRecords.length - 1] : [];
+    let orderDetail = await orderDetails.getOrderItems(Record.id);
+
+    // return orderDetail;
+
     let finallRecords = await Promise.all(
-      allRecords.map(async (ele) => {
-        return await orderDetails.get(ele.OrderID);
+      orderDetail.map(async (ele) => {
+        return {
+          ...ele.dataValues,
+          ColorID: await color.get(ele.ColorID),
+          ProductID: await products.get(ele.ProductID),
+          SizeID: await size.get(ele.SizeID),
+          Image: await image.getImageByColorID(ele.ColorID),
+        };
       })
     );
+
+    return finallRecords;
+    let x = await Promise.all(
+      finallRecords.map(async (product) => ({
+        ...product,
+        ColorID: await Promise.all(
+          await product.color.map(async (ele) => {
+            return await {
+              ...ele.dataValues,
+              image: await image.getColorDetails(ele.id),
+              size: await size.getColorDetails(ele.id),
+            };
+          })
+        ),
+      }))
+    );
+
+    return x;
 
     // let productsList = await Promise.all(
     //   finallRecords.map((fele) =>

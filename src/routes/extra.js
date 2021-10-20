@@ -97,7 +97,8 @@ async function getProductFromOrder(req, res) {
     dataModules.OrderDetails,
     dataModules.Product,
     dataModules.Color,
-    dataModules.Size
+    dataModules.Size,
+    dataModules.Image
   );
   res.status(200).json(allRecords);
 }
